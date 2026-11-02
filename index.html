@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mosibti ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #090009;
+    color: #ff8fcf;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 0;
+    overflow-x: hidden;
+}
+
+.card {
+    width: 90%;
+    max-width: 420px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid #ff4da6;
+    border-radius: 25px;
+    background: linear-gradient(145deg, #190015, #080008);
+    box-shadow: 0 0 25px #ff168455;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #ff63b5;
+    text-shadow: 0 0 15px #ff1684;
+    font-size: 32px;
+}
+
+.heart {
+    font-size: 65px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    50% { transform: scale(1.2); }
+}
+
+.question {
+    color: #fff0f8;
+    font-size: 21px;
+    margin: 25px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+    min-height: 60px;
+}
+
+button {
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 1px solid #ff63b5;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+#yes {
+    background: #ff4da6;
+    color: #250014;
+    box-shadow: 0 0 15px #ff168477;
+}
+
+#no {
+    background: #24101f;
+    color: #ffc4e3;
+}
+
+#message {
+    display: none;
+    margin-top: 25px;
+    line-height: 1.8;
+    color: white;
+}
+
+#story p {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: appear 1s forwards;
+    margin: 20px 0;
+}
+
+@keyframes appear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#next, #ending button {
+    background: #ff4da6;
+    color: #250014;
+    margin-top: 20px;
+}
+
+#ending {
+    margin-top: 30px;
+}
+
+.floating {
+    position: fixed;
+    bottom: -40px;
+    color: #ff4da6;
+    animation: floatUp 7s linear forwards;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.small {
+    color: #d99aba;
+    font-size: 13px;
+    margin-top: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="heart">❤️</div>
+
+    <h1>Hey, Mosibti!</h1>
+
+    <p>I've got a little question for you...</p>
+
+    <div class="question">
+        Do you love me? 🥹💕
+    </div>
+
+    <div class="buttons">
+        <button id="yes" onclick="sayYes()">
+            YES ❤️
+        </button>
+
+        <button id="no">
+            NO 💔
+        </button>
+    </div>
+
+    <div id="message">
+
+        <h2>❤️ My Mosibti ❤️</h2>
+
+        <div id="story"></div>
+
+        <button id="next" onclick="nextLine()">
+            Continue ❤️
+        </button>
+
+        <div id="ending" style="display:none;">
+
+            <div style="font-size:50px;">💋❤️🌹</div>
+
+            <h2>One last kiss?</h2>
+
+            <button onclick="finalKiss()">
+                YES, ALWAYS 💋
+            </button>
+
+            <p id="kiss"></p>
+
+        </div>
+    </div>
+
+    <div class="small">
+        Made with love, just for you 💗
+    </div>
+
+</div>
+
+<script>
+const noButton = document.getElementById("no");
+
+function moveButton() {
+    const maxX = Math.max(
+        0,
+        window.innerWidth - noButton.offsetWidth - 20
+    );
+
+    const maxY = Math.max(
+        0,
+        window.innerHeight - noButton.offsetHeight - 20
+    );
+
+    noButton.style.position = "fixed";
+    noButton.style.zIndex = "10";
+    noButton.style.left = Math.random() * maxX + "px";
+    noButton.style.top = Math.random() * maxY + "px";
+}
+
+noButton.addEventListener("pointerenter", moveButton);
+
+noButton.addEventListener("touchstart", function(event) {
+    event.preventDefault();
+    moveButton();
+});
+
+noButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    moveButton();
+});
+
+function sayYes() {
+    document.getElementById("message").style.display = "block";
+
+    document.querySelector(".question").textContent =
+        "A little story, just for you... ❤️";
+
+    document.querySelector(".buttons").style.display = "none";
+
+    nextLine();
+
+    for (let i = 0; i < 10; i++) {
+        setTimeout(createHeart, i * 150);
+    }
+
+    setTimeout(() => {
+        document.getElementById("message").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }, 200);
+}
+
+const loveLines = [
+    "You thought this was just a little game, didn't you? 🥹",
+    "Well, my love, I have something to tell you...",
+    "If I could live all the beautiful moments of my life again,",
+    "I'd still want to find my way to you. ❤️",
+    "And if life gave me a thousand different paths,",
+    "I'd hope that one of them would lead me back to you. 🌹",
+    "I might not always find the perfect words to explain my feelings...",
+    "But that doesn't change how special you are to me. 💗",
+    "You're the girl who can make an ordinary day feel extraordinary.",
+    "And if I could give you one thing,",
+    "I'd give you the ability to see yourself through my eyes.",
+    "Then you'd understand why you mean so much to me. 🥹❤️",
+    "I can't promise every day will be perfect...",
+    "But I want to keep making memories with you.",
+    "Sharing laughs with you, and finding little reasons to make you smile.",
+    "Because out of all the people in this world...",
+    "You're the one I'd choose to keep writing my story with. ❤️",
+    "Thank you for being my girl. Thank you for being you.",
+    "I love you, my Mosibti. Today, tomorrow, and in all the little moments in between. 💋"
+];
+
+let lineIndex = 0;
+
+function nextLine() {
+    if (lineIndex < loveLines.length) {
+
+        const story = document.getElementById("story");
+        const line = document.createElement("p");
+
+        line.textContent = loveLines[lineIndex];
+
+        story.appendChild(line);
+
+        lineIndex++;
+
+        if (lineIndex === loveLines.length) {
+            document.getElementById("next").textContent =
+                "One last thing... ❤️";
+        }
+
+    } else {
+
+        document.getElementById("next").style.display = "none";
+        document.getElementById("ending").style.display = "block";
+
+        document.getElementById("ending").scrollIntoView({
+            behavior: "smooth",
+            block: "end"
+        });
+    }
+}
+
+function finalKiss() {
+    document.getElementById("kiss").textContent =
+        "Sending you the biggest kiss ever, my Mosibti! 💋❤️🌹";
+
+    for (let i = 0; i < 25; i++) {
+        setTimeout(createHeart, i * 150);
+    }
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+
+    heart.className = "floating";
+
+    heart.textContent = ["❤️", "💕", "💖", "💗", "💘"][
+        Math.floor(Math.random() * 5)
+    ];
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (20 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}
+</script>
+
+</body>
+</html>
